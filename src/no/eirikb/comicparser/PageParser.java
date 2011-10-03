@@ -6,7 +6,7 @@
  * this stuff is worth it, you can buy me a beer in return Eirik Brandtzæg
  * =============================================================================
  */
-package no.eirikb.gcomic.parse;
+package no.eirikb.comicparser
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
