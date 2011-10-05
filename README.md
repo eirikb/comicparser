@@ -1,4 +1,8 @@
 ComicParser
 -
 
-This is a library to extract frames from a comic
+This branch is about converting the code to clojure
+Should work:
+
+   mvn clojure:test
+
