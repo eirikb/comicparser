@@ -1,4 +1,4 @@
-(ns no.eirikb.comicparser.comicparser
+(ns no.eirikb.comicparser.test.comicparser
   (:use clojure.test))
 
 (defn add2 [x] 
