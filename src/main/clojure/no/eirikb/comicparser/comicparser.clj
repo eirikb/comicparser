@@ -1,4 +1,4 @@
 (ns no.eirikb.comicparser.comicparser)
 
-(defn main [args]
-  (println "Hello World!"))
+(defn parse [list] 
+  (println list ", world!"))
