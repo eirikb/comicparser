@@ -17,11 +17,13 @@
        (for [x (range (.getWidth img)) 
              y (range (.getHeight img))] [x y])))
 
+(def image 
+  (ImageIO/read (File. "testdata/caroling.png")))
+
 (def pixels
-  (let [image (ImageIO/read (File. "testdata/caroling.png"))]
-    (get-pixels image)))
+  (get-pixels image))
 
 (deftest test-parse
-         (println (count pixels)))
+         (parse pixels (.getWidth image) (.getHeight image)))
 
 (run-tests)
