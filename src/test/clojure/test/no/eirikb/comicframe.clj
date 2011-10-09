@@ -1,6 +1,6 @@
-(ns test.no.eirikb.comicparser.comicparser
+(ns test.no.eirikb.comicframe
   (:use clojure.test)
-  (:use no.eirikb.comicparser.comicparser)
+  (:use no.eirikb.comicframe)
   (:import (javax.imageio ImageIO)
            (java.io File)))
 
@@ -33,8 +33,8 @@
 (deftest test-parse
          (parse pixels (.getWidth image) (.getHeight image)))
 
-(with-private-fns [no.eirikb.comicparser.comicparser [calculate-base-color]]
+(with-private-fns [no.eirikb.comicframe [calculate-base-color]]
                   (deftest test-calculate-base-color
-                           (calculate-base-color pixels (.getWidth image) (.getHeight image))))
+                           (is (= (calculate-base-color pixels (.getWidth image) (.getHeight image))) 255)))
 
 (run-tests)
