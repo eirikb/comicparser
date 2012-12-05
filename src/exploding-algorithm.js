@@ -7,16 +7,19 @@ ExplodingAlgorithm = function(getPixel, x, y, width, height, percentage) {
         c: {}
     };
     var current = 'a';
+    self.stats = new Stats(width, height);
     self.borders = new Borders();
 
     var start = getPixelValue(x, y);
     check.push([x, y]);
 
     self.run = function() {
-        while (self.explode()) {}
+        while (!self.explode()) {}
     };
 
     self.explode = function() {
+        self.stats.iterations++;
+
         var newCheck = [];
         check.forEach(function(a) {
             common.box(a[0], a[1], function(x, y) {
@@ -27,9 +30,14 @@ ExplodingAlgorithm = function(getPixel, x, y, width, height, percentage) {
                 }
             });
         });
+
         check = newCheck;
         next();
-        return check.length > 0;
+        return check.length <= 0;
+    };
+
+    self.getChecked = function() {
+        return checked;
     };
 
     function getPixelValue(x, y) {
@@ -55,6 +63,7 @@ ExplodingAlgorithm = function(getPixel, x, y, width, height, percentage) {
         var c = checked[current];
         if (!c[x]) c[x] = {};
         c[x][y] = true;
+        self.stats.updatePercentageComplete(x, y);
     }
 
     function isChecked(x, y) {
@@ -63,8 +72,5 @@ ExplodingAlgorithm = function(getPixel, x, y, width, height, percentage) {
         if (checked.b[x] && checked.b[x][y]) return true;
         if (checked.c[x] && checked.c[x][y]) return true;
     }
-
-    self.getChecked = function() {
-        return checked;
-    };
 };
+
