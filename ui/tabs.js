@@ -8,6 +8,11 @@ tabs = (function() {
         });
     }
 
+    self.enable = function(i) {
+        self.current = i;
+        checkTabs();
+    };
+
     self.show = function(i) {
         self.current = i;
         checkTabs();
@@ -15,8 +20,12 @@ tabs = (function() {
     };
 
     $('.nav-tabs li a').click(function() {
-        if ($(this).parent().hasClass('disabled')) return;
-        $(this).tab('show');
+        var $this = $(this);
+        if ($this.parent().hasClass('disabled')) return;
+        $this.tab('show');
+        render.stop();
+        self.current = $this.index();
+        checkTabs();
         return false;
     });
 

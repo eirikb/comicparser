@@ -6,10 +6,16 @@
         <title>Exploding Algorithm</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <!--
         <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
         <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
         <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+        -->
+        <link href="offline/bootstrap.css" rel="stylesheet">
+        <link href="offline/bootstrap-responsive.css" rel="stylesheet">
+        <link href="offline/docs.css" rel="stylesheet">
+        <link href="offline/prettify.css" rel="stylesheet">
         <link href="ui/style.css" rel="stylesheet">
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -25,7 +31,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#select">Select image</a></li>
                         <li><a href="#parse" class="disabled">Parse image</a></li>
-                        <li><a href="#results">See results</a></li>
+                        <li><a href="#results" class="disabled">See results</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="select">
@@ -39,17 +45,7 @@
                                 </li>
                                 <li class="span4">
                                 <a href="#" class="thumbnail">
-                                    <img id="cryptogame" src="img/cryptogame.png">
-                                </a>
-                                </li>
-                                <li class="span4">
-                                <a href="#" class="thumbnail">
                                     <img id="sammy" src="img/sammy.jpg">
-                                </a>
-                                </li>
-                                <li class="span4">
-                                <a href="#" class="thumbnail">
-                                    <img id="krazykat" src="img/krazykat.jpg">
                                 </a>
                                 </li>
                                 <li class="span4">
@@ -70,22 +66,31 @@
                                         <input type="range" min="1" max="100" id="fps" value="100">
                                         <span></span>
                                     </label>
+                                    <label class="complete"></label>
                                 </fieldset>
                                 <canvas>
                                 </form>
                             </div>
                         </div>
+                        <div class="tab-pane active" id="results">
+                            <h2>Results</h2>
+                            <p>The image you select will be used for parsing in the next step.</p>
+                        </div>
                     </div>
                 </div>
 
+                <!--
                 <script src="http://code.jquery.com/jquery.min.js"></script>
                 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+                -->
+                <script src="offline/jquery.min.js"></script>
+                <script src="offline/bootstrap-tab.js"></script>
                 <script src="ui/tabs.js"></script>
                 <script src="ui/image.js"></script>
                 <script src="ui/render.js"></script>
-                <script src="ui/init.js"></script>
                 <script src="src/common.js"></script>
                 <script src="src/borders.js"></script>
+                <script src="src/stats.js"></script>
                 <script src="src/exploding-algorithm.js"></script>
             </body>
         </html>
