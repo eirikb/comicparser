@@ -24,7 +24,8 @@ tabs = (function() {
         if ($this.parent().hasClass('disabled')) return;
         $this.tab('show');
         render.stop();
-        self.current = $this.index();
+        self.current = $this.parent().index();
+        console.log(self.current);
         checkTabs();
         return false;
     });
