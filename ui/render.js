@@ -24,6 +24,7 @@ render = (function() {
         $('#start').show();
         $('#stop').hide();
         $('#complete').show();
+        $('.progress').removeClass('active');
     }
 
     $(function() {
@@ -31,9 +32,15 @@ render = (function() {
         context = $canvas.get(0).getContext('2d');
         $visualize = $('#visualize');
 
+        if (window.localStorage && typeof localStorage.visualize !== 'undefine') {
+            $visualize.prop('checked', 'true' === localStorage.visualize);
+        }
+
         $visualize.change(function() {
-            $('.visualize').slideToggle($visualize.is(':checked'));
-        });
+            var isChecked = $visualize.is(':checked');
+            $('.visualize')[isChecked ? 'slideDown' : 'slideUp']();
+            if (window.localStorage) localStorage.visualize = isChecked;
+        }).change()
 
         $('#complete').click(function() {
             tabs.show(2);
@@ -97,6 +104,7 @@ render = (function() {
             $('#start').hide();
             $('#stop').show();
             $('#complete').hide();
+            $('.progress').addClass('active');
 
             clearTimeout(interval);
             self.ea = new ExplodingAlgorithm(getPixel, x, y, width, height, 80);
@@ -108,14 +116,12 @@ render = (function() {
                 done();
                 return;
             }
-            var $progress = $('.progress');
+
             var $bar = $('.progress .bar');
-            $progress.addClass('active');
             (function loop() {
                 if (self.ea.explode()) {
                     clearTimeout(interval);
                     done();
-                    $progress.removeClass('active');
                 }
                 clear(image);
                 draw();
