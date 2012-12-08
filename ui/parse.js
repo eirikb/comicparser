@@ -1,4 +1,4 @@
-render = (function() {
+parse = (function() {
     var self = {};
     var $canvas;
     var $visualize;
@@ -11,16 +11,12 @@ render = (function() {
         init(img, img.width, img.height);
     };
 
-    self.setImageBySrc = function(src) {
-        img.src = src;
-    };
-
     self.stop = function() {
         clearTimeout(interval);
     };
 
     function done() {
-        tabs.enable(3);
+        tabs.enable(2);
         $('#start').show();
         $('#stop').hide();
         $('#complete').show();
@@ -31,6 +27,10 @@ render = (function() {
         $canvas = $('#render');
         context = $canvas.get(0).getContext('2d');
         $visualize = $('#visualize');
+
+        $('a[href=#parse]').on('show', function() {
+            img.src = imageSelect.src;
+        });
 
         if (window.localStorage && typeof localStorage.visualize !== 'undefine') {
             $visualize.prop('checked', 'true' === localStorage.visualize);

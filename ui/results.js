@@ -3,12 +3,17 @@ results = (function() {
     var img = new Image();
 
     img.onload = function() {
-    //    init(img, img.width, img.height);
     };
 
     self.setImageBySrc = function(src) {
         img.src = src;
     };
+
+    $(function() {
+        $('[href=#results]').on('show', function() {
+
+        });
+    });
 
     return self;
 })();

@@ -1,7 +1,11 @@
-$(function() {
+imageSelect = (function() {
+    var self = {};
+
     $('.thumbnails a').click(function() {
         var $img = $(this).find('img');
-        render.setImageBySrc($img.attr('src'));
+        self.src = $img.attr('src');
         tabs.show(1);
     });
-});
+
+    return self;
+})();
