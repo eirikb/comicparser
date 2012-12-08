@@ -16,23 +16,36 @@ render = (function() {
     };
 
     self.stop = function() {
-        clearInterval(interval);
+        clearTimeout(interval);
     };
 
-    function done(ea) {
+    function done() {
         tabs.enable(3);
+        $('#start').show();
+        $('#stop').hide();
+        $('#complete').show();
     }
 
     $(function() {
-        $canvas = $('canvas');
+        $canvas = $('#render');
         context = $canvas.get(0).getContext('2d');
         $visualize = $('#visualize');
+
+        $visualize.change(function() {
+            $('.visualize').slideToggle($visualize.is(':checked'));
+        });
+
+        $('#complete').click(function() {
+            tabs.show(2);
+        });
 
         $('#fps').change(function() {
             var $fps = $(this);
             $fps.next().text($fps.val() + ' fps ish');
             sleep = Math.floor(1000 / $('#fps').val());
         }).change();
+
+        $('[rel=tooltip]').tooltip();
     });
 
     function getMouePos($el, e) {
@@ -46,8 +59,9 @@ render = (function() {
         context.drawImage(image, 0, 0);
     }
 
-    function draw(ea) { ['a', 'b', 'c'].forEach(function(c) {
-            c = ea.getChecked()[c];
+    function draw() {
+        ['a', 'b', 'c'].forEach(function(c) {
+            c = self.ea.getChecked()[c];
             Object.keys(c).forEach(function(a) {
                 Object.keys(c[a]).forEach(function(b) {
                     context.fillRect(a, b, 1, 1);
@@ -55,9 +69,9 @@ render = (function() {
             });
         });
 
-        Object.keys(ea.borders.found).forEach(function(x) {
-            Object.keys(ea.borders.found[x]).forEach(function(y) {
-                context.fillStyle = ['green', 'blue', 'red', 'yellow', 'orange'][ea.borders.found[x][y].id % 5];
+        Object.keys(self.ea.borders.found).forEach(function(x) {
+            Object.keys(self.ea.borders.found[x]).forEach(function(y) {
+                context.fillStyle = ['green', 'blue', 'red', 'yellow', 'orange'][self.ea.borders.found[x][y].id % 5];
                 context.fillRect(x, y, 1, 1);
             });
             context.fillStyle = 'black';
@@ -75,35 +89,55 @@ render = (function() {
         var pixels = context.getImageData(0, 0, width, height).data;
 
         var getPixel = function(x, y) {
-            var pos = (y * (width * 4)) + (x * 4);
-            return [pixels[pos], pixels[pos + 1], pixels[pos + 2], pixels[pos + 3]];
-        };
+                var pos = (y * (width * 4)) + (x * 4);
+                return [pixels[pos], pixels[pos + 1], pixels[pos + 2], pixels[pos + 3]];
+            };
 
-        $canvas.off('click').click(function(e) {
-            clearInterval(interval);
-            var pos = getMouePos($canvas, e);
-            var ea = new ExplodingAlgorithm(getPixel, pos.x, pos.y, width, height, 80);
+        function start(x, y) {
+            $('#start').hide();
+            $('#stop').show();
+            $('#complete').hide();
+
+            clearTimeout(interval);
+            self.ea = new ExplodingAlgorithm(getPixel, x, y, width, height, 80);
             if (!$visualize.is(':checked')) {
                 var t = Date.now();
-                ea.run();
+                self.ea.run();
                 t = Date.now() - t;
-                draw(ea);
-                done(ea);
+                draw();
+                done();
                 return;
             }
-            interval = setInterval(function() {
-                if (ea.explode()) {
-                    clearInterval(interval);
-                    done(ea);
+            var $progress = $('.progress');
+            var $bar = $('.progress .bar');
+            $progress.addClass('active');
+            (function loop() {
+                if (self.ea.explode()) {
+                    clearTimeout(interval);
+                    done();
+                    $progress.removeClass('active');
                 }
                 clear(image);
-                draw(ea);
-                $('.complete').text(ea.stats.percentageComplete);
-            },
-            sleep);
+                draw();
+                $bar.width(self.ea.stats.percentageComplete + '%');
+                interval = setTimeout(loop, sleep);
+            })();
+        }
+
+        $canvas.off('click').click(function(e) {
+            var pos = getMouePos($canvas, e);
+            start(pos.x, pos.y);
+        });
+
+        $('#start').click(function() {
+            start(10, 10);
+        });
+        $('#stop').click(function() {
+            self.stop();
+            $('#start').show();
+            $('#stop').hide();
         });
     }
 
     return self;
 })();
-
