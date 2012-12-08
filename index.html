@@ -3,25 +3,19 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Exploding Algorithm</title>
+        <title>Comicparser</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--
         <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
         <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
         <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-        -->
-        <link href="offline/bootstrap.css" rel="stylesheet">
-        <link href="offline/bootstrap-responsive.css" rel="stylesheet">
-        <link href="offline/docs.css" rel="stylesheet">
-        <link href="offline/prettify.css" rel="stylesheet">
         <link href="ui/style.css" rel="stylesheet">
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
-                                                        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-                                                            <![endif]-->
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </head>
     <body>
         <div class="container">
@@ -56,38 +50,59 @@
                             </ul>
                         </div>
                         <div class="tab-pane" id="parse">
-                            <form>
+                            <form class="form-horizontal">
                                 <fieldset>
+                                    <legend>Settings</legend>
                                     <label>
                                         <input type="checkbox" id="visualize" checked="checked">
-                                        Visualize
+                                        Visualize progress
                                     </label>
-                                    <label>
+                                    <label class="visualize">
+                                        <span class="help-inline">visualizion speed</span>
                                         <input type="range" min="1" max="100" id="fps" value="100">
                                         <span></span>
                                     </label>
-                                    <label class="complete"></label>
+                                    <span class="help-inline">Progress (
+                                        <a href="#" rel="tooltip" title="Current maximum square (minX,minY,maxX,maxY) compared to image size">ish</a>
+                                        ):
+                                    </span>
+                                    <div class="progress progress-striped">
+                                        <div class="bar" style="width: 0%;"></div>
+                                    </div>
+                                    <p>
+                                    <button id="start" type="button" class="btn btn-primary">
+                                        <i class="icon-white icon-play"></i>
+                                        Start
+                                    </button>
+                                    <button id="stop" type="button" class="btn btn-primary hide">
+                                        <i class="icon-white icon-stop"></i>
+                                        Stop
+                                    </button>
+                                    <button id="complete" type="button" class="btn btn-success hide">
+                                        <i class="icon-arrow-right"></i>
+                                        Complete! Next step
+                                    </button>
+                                    </p>
                                 </fieldset>
-                                <canvas>
+                                <canvas id="render">
                                 </form>
                             </div>
-                        </div>
-                        <div class="tab-pane active" id="results">
-                            <h2>Results</h2>
-                            <p>The image you select will be used for parsing in the next step.</p>
+                            <div class="tab-pane" id="results">
+                                <h2>Results</h2>
+                                <p>The image you select will be used for parsing in the next step.</p>
+                                <canvas id="result">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!--
                 <script src="http://code.jquery.com/jquery.min.js"></script>
                 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
-                -->
-                <script src="offline/jquery.min.js"></script>
-                <script src="offline/bootstrap-tab.js"></script>
+                <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
                 <script src="ui/tabs.js"></script>
                 <script src="ui/image.js"></script>
                 <script src="ui/render.js"></script>
+                <script src="ui/results.js"></script>
                 <script src="src/common.js"></script>
                 <script src="src/borders.js"></script>
                 <script src="src/stats.js"></script>
