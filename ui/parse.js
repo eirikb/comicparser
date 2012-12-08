@@ -29,7 +29,7 @@ parse = (function() {
         $visualize = $('#visualize');
 
         $('a[href=#parse]').on('show', function() {
-            img.src = imageSelect.src;
+            img.src = select.src;
         });
 
         if (window.localStorage && typeof localStorage.visualize !== 'undefine') {
@@ -40,7 +40,7 @@ parse = (function() {
             var isChecked = $visualize.is(':checked');
             $('.visualize')[isChecked ? 'slideDown' : 'slideUp']();
             if (window.localStorage) localStorage.visualize = isChecked;
-        }).change()
+        }).change();
 
         $('#complete').click(function() {
             tabs.show(2);
