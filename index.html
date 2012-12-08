@@ -24,8 +24,8 @@
                     <h1>Comicparser</h1>
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#select">Select image</a></li>
-                        <li><a href="#parse" class="disabled">Parse image</a></li>
-                        <li><a href="#results" class="disabled">See results</a></li>
+                        <li class="disabled"><a href="#parse" class="disabled">Parse image</a></li>
+                        <li class="disabled"><a href="#results" class="disabled">See results</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="select">
@@ -70,18 +70,22 @@
                                         <div class="bar" style="width: 0%;"></div>
                                     </div>
                                     <p>
-                                    <button id="start" type="button" class="btn btn-primary">
-                                        <i class="icon-white icon-play"></i>
-                                        Start
-                                    </button>
-                                    <button id="stop" type="button" class="btn btn-primary hide">
-                                        <i class="icon-white icon-stop"></i>
-                                        Stop
-                                    </button>
-                                    <button id="complete" type="button" class="btn btn-success hide">
-                                        <i class="icon-arrow-right"></i>
-                                        Complete! Next step
-                                    </button>
+                                        <button id="start" type="button" class="btn btn-primary">
+                                            <i class="icon-white icon-play"></i>
+                                            Start
+                                        </button>
+                                        <button id="stop" type="button" class="btn btn-primary hide">
+                                            <i class="icon-white icon-stop"></i>
+                                            Stop
+                                        </button>
+                                        <button id="complete" type="button" class="btn btn-success hide">
+                                            <i class="icon-arrow-right"></i>
+                                            Complete! Next step
+                                        </button>
+                                    </p>
+                                    <p>
+                                    <i class="icon-hand-down"></i>
+                                    Or click inside the image to select a starting-point
                                     </p>
                                 </fieldset>
                                 <canvas id="render">
@@ -90,22 +94,21 @@
                             <div class="tab-pane" id="results">
                                 <h2>Results</h2>
                                 <p>The image you select will be used for parsing in the next step.</p>
-                                <canvas id="result">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <script src="http://code.jquery.com/jquery.min.js"></script>
-                <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
-                <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-                <script src="ui/tabs.js"></script>
-                <script src="ui/image.js"></script>
-                <script src="ui/render.js"></script>
-                <script src="ui/results.js"></script>
-                <script src="src/common.js"></script>
-                <script src="src/borders.js"></script>
-                <script src="src/stats.js"></script>
-                <script src="src/exploding-algorithm.js"></script>
-            </body>
-        </html>
+                    <script src="http://code.jquery.com/jquery.min.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+                    <script src="ui/tabs.js"></script>
+                    <script src="ui/image.js"></script>
+                    <script src="ui/render.js"></script>
+                    <script src="ui/results.js"></script>
+                    <script src="src/common.js"></script>
+                    <script src="src/borders.js"></script>
+                    <script src="src/stats.js"></script>
+                    <script src="src/exploding-algorithm.js"></script>
+                </body>
+            </html>
