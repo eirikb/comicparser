@@ -3,3 +3,7 @@ canvas {
     border: 1px solid;
     cursor: crosshair;
 }
+
+.progress {
+    width: 50%;
+}
