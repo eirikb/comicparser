@@ -14,7 +14,7 @@ tabs = (function() {
         var $this = $(this);
         if ($this.parent().hasClass('disabled')) return;
         $this.tab('show');
-        render.stop();
+        parse.stop();
         return false;
     });
 

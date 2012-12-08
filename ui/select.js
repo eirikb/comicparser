@@ -1,4 +1,4 @@
-imageSelect = (function() {
+select = (function() {
     var self = {};
 
     $('.thumbnails a').click(function() {
